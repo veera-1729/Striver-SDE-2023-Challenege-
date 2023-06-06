@@ -1,0 +1,39 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution 
+{
+	public static ArrayList<Integer> nextPermutation(ArrayList<Integer> perm) 
+	{
+		int firstDecreasing = perm.size()-2;
+		while(firstDecreasing >= 0 && perm.get(firstDecreasing) >= perm.get(firstDecreasing+1))
+			firstDecreasing--;
+		if(firstDecreasing >= 0)
+		{
+			int nextGreater = perm.size()-1;
+			while(nextGreater >= 0 && perm.get(nextGreater) <= perm.get(firstDecreasing))
+				nextGreater--;
+			swap(perm,firstDecreasing,nextGreater);
+		}
+		reverse(perm,firstDecreasing+1);
+		return perm;
+	}
+	public static void swap(ArrayList<Integer> perm , int i , int j)
+	{
+		int temp = perm.get(i);
+		perm.set(i,perm.get(j));
+		perm.set(j,temp);
+	}
+	public static void reverse(ArrayList<Integer> perm,int start)
+	{
+		int j = perm.size()-1;
+		while(start < j)
+		{
+			swap(perm, start, j);
+			j--;
+			start++;
+		}
+	}
+}
