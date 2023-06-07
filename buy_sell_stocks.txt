@@ -1,0 +1,23 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution
+{
+    public static int maximumProfit(ArrayList<Integer> prices)
+    {   
+        int res = 0 , buy = Integer.MAX_VALUE , sell = 0;
+        for(int i :prices)
+        {
+            if(i < buy)
+            {
+                buy = i;
+            }
+            else
+            {
+                res = Math.max(res , i-buy);
+            }
+        }
+        return res;
+    }
+}
