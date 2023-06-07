@@ -1,0 +1,23 @@
+import java.util.* ;
+import java.io.*; 
+
+public class Solution 
+{
+	
+	public static long maxSubarraySum(int[] arr, int n) 
+	{
+		// write your code here
+		long res = -(long)1e9 , sum = 0;
+		for(int i : arr)
+		{
+			sum += i;
+			res = Math.max(res,sum);
+			if(sum < 0)
+				sum = 0;
+		}
+		//if res is less than zero since we can consider empty subarray whose sum is 0 
+		// we can return 0 as maximum sub array
+		return res < 0 ? 0 : res;
+	}
+
+}
