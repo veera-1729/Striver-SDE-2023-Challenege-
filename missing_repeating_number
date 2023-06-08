@@ -1,0 +1,25 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution 
+{
+
+    public static int[] missingAndRepeating(ArrayList<Integer> arr, int n) 
+    {
+        // Write your code here
+        int[] f = new int[n+1];
+        for(int i : arr)
+            f[i]++;
+        int miss = 0 , dup = 0;
+        for(int i = 1 ; i <= n ;i++)
+        {
+            if(f[i] == 0)
+                miss = i;
+            if(f[i] > 1)
+                dup = i;
+        }
+        return new int[]{miss , dup};
+        
+    }
+}
