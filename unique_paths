@@ -1,0 +1,39 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution 
+{
+	static int[][] dirs = new int[][]{{1,0},{0,1}};
+	static int r , c;
+	public static int uniquePaths(int m, int n) 
+	{
+		r = m;
+		c = n;
+		int[][] mat = new int[m][n];
+		for(int[] mi : mat)
+			Arrays.fill(mi , 1);
+		boolean[][] vis = new boolean[m][n];
+		int[][] dp = new int[m][n];
+		for(int[] d : dp)
+			Arrays.fill(d,-1);
+		return dfs(0,0,mat,vis,dp);
+	}
+	public static int dfs(int i , int j ,int[][] mat, boolean[][] vis,int[][] dp)
+	{
+		if(i == r-1 && j == c-1)
+			return 1;
+		if(vis[i][j])
+			return 0;
+		if(dp[i][j] != -1)
+			return dp[i][j];
+		int l = 0;
+		for(int[] d : dirs)
+		{
+			int nr = i+d[0] , nc = j+d[1];
+			if(nr>=0 && nr < r && nc>=0 && nc < c && !vis[nr][nc])
+			{
+				l+=dfs(nr,nc,mat,vis,dp);
+			}
+		}
+		return dp[i][j] = l;
+	}
+}
