@@ -1,0 +1,60 @@
+/****************************************************************
+
+ Following is the class structure of the Node class:
+
+ class Node 
+ {
+     public int data;
+     public Node next;
+
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+     }
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+     }
+     Node(int data, Node next)
+     {
+         this.data = data;
+         this.next = next;
+     }
+ }
+
+ *****************************************************************/
+
+public class Solution 
+{
+    public static int findIntersection(Node firstHead, Node secondHead) 
+    {
+        boolean flag1 = false , flag2 = false;
+        Node h1 = firstHead , h2 = secondHead;
+        while(h1 != null || h2 != null)
+        {
+            if(h1 == h2)
+                return h1.data;
+            if(h1.next == null)
+            {
+                if(flag1)
+                    return -1;
+                h1 = secondHead;
+                flag1 = true;
+            }
+            else
+                h1 = h1.next;
+            if(h2.next == null)
+            {
+                if(flag2)
+                    return -1;
+                h2 = firstHead;
+                flag2 = true;
+            }
+            else
+                h2 = h2.next;
+        }
+        return -1;
+    }
+}
