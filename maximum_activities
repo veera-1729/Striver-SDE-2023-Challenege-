@@ -1,0 +1,40 @@
+import java.util.*;
+
+class Activity
+{
+    int start,end;
+    Activity(int s,int e)
+    {
+        this.start = s;
+        this.end = e;
+    }
+}
+class comp implements Comparator<Activity>{
+    public int compare(Activity a, Activity b){
+        return a.end - b.end;
+    }
+}
+public class Solution 
+{
+    public static int maximumActivities(List<Integer> start, List<Integer> end) 
+    {
+        //Write your code here
+        ArrayList<Activity> act = new ArrayList<>();
+        for(int i = 0 ; i < start.size() ; i++)
+        {
+            act.add(new Activity(start.get(i),end.get(i)));
+        }
+        Collections.sort(act, new comp());
+        int ans = 0,prev=0;
+        for(int i = 0 ; i < act.size() ; i++)
+        {
+            Activity curr = act.get(i);
+            if(curr.start >= prev)
+            {
+                ans++;
+                prev = curr.end;
+            }
+        }
+        return ans;
+    }
+}
