@@ -1,0 +1,49 @@
+import java.util.*;
+public class Solution 
+{
+    static ArrayList<ArrayList<Integer>> res;
+    static int[] row ,col;
+    static int[] upperDiagonal  , bottomDiagonal;
+    public static ArrayList<ArrayList<Integer>> solveNQueens(int n) 
+    {
+        row = new int[n] ;
+        col = new int[n];
+        upperDiagonal = new int[2*n] ;
+        bottomDiagonal = new int[2*n];
+        res = new ArrayList<>();
+        int[][] b = new int[n][n];
+        helper(0,n,b);
+        return res;
+    }
+    public static void helper(int c,int n,int[][] b)
+    {
+        if(c == n)
+        {
+            ArrayList<Integer> ans = new ArrayList<>();
+            for(int[] r : b)
+            {
+                for(int p : r)
+                {
+                    ans.add(p);
+                }
+            }
+            res.add(ans);
+            return;
+        }
+        for(int i = 0 ; i < n ; i++)
+        {
+            if(row[i] == 0 && upperDiagonal[n-1+i-c] == 0 && bottomDiagonal[i+c] == 0)
+            {
+                row[i] = 1;
+                upperDiagonal[n-1+i-c] = 1;
+                bottomDiagonal[i+c] = 1;
+                b[i][c] = 1;
+                helper(c+1,n,b);
+                row[i] = 0;
+                upperDiagonal[n-1+i-c] = 0;
+                bottomDiagonal[i+c] = 0;
+                b[i][c] = 0;
+            }
+        }
+    }
+}
